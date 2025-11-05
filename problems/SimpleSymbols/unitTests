@@ -1,0 +1,10 @@
+[
+	{
+		"input": ["+d+=3=+s+"],
+		"output": "true"
+	},
+	{
+		"input": ["f++d+"],
+		"output": "false"
+	}
+]

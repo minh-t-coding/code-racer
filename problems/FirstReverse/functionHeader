@@ -1,0 +1,4 @@
+function FirstReverse(str) { 
+	// code goes here  
+	return str; 
+}

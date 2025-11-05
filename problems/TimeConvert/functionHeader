@@ -1,0 +1,5 @@
+function TimeConvert(num) { 
+
+	// code goes here  
+	return num; 
+}

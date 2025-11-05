@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<title>Code Racer</title>
+<body onload="show();">
+<div id="place" class="place"></div>
+
+<div class="problem">
+	<div id="probName"></div>
+	<h3>Problem:</h4>
+	<div class="spec" id="prob"></div>
+	<h3>Sample Test Cases:</h4>
+	<div class="testCases" id="tests"> 
+	</div>
+</div>
+
+<div class="col">
+<div class="watch">
+<div><b>Time:</b> <span id="time"></span></div>
+
+</div>
+
+<textarea spellcheck="false" class="codeInput" rows="4" cols="80" id="codeInput">
+</textarea>
+<img class="button" id="button" src="./images/buttonRunCode.png" onclick="">
+<div class="console" id="console"></div>
+</div>
+
+
+
+
+
+
+<script>
+var codeInput = document.getElementById("codeInput");
+
+var spec = document.getElementById("spec");
+var con = document.getElementById("console");
+
+codeInput.value="";
+
+
+codeInput.onkeydown = function(e){
+	if(e.keyCode==9 || e.which==9){
+		e.preventDefault();
+		var s = this.selectionStart;
+		this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+		this.selectionEnd = s+1;   
+    }
+}
+function getCode(){
+	return codeInput.value;
+	
+}
+var ajax;
+var response;
+function runCode(){
+	sendCode();
+
+
+}
+
+var	clsStopwatch = function() {
+		// Private vars
+		var	startAt	= 0;	// Time of last start / resume. (0 if not running)
+		var	lapTime	= 0;	// Time on the clock when last stopped in milliseconds
+
+		var	now	= function() {
+				return (new Date()).getTime(); 
+			}; 
+ 
+		// Public methods
+		// Start or resume
+		this.start = function() {
+				startAt	= startAt ? startAt : now();
+			};
+
+		// Stop or pause
+		this.stop = function() {
+				// If running, update elapsed time otherwise keep it
+				lapTime	= startAt ? lapTime + now() - startAt : lapTime;
+				startAt	= 0; // Paused
+			};
+
+		// Reset
+		this.reset = function() {
+				lapTime = startAt = 0;
+			};
+
+		// Duration
+		this.time = function() {
+				return lapTime + (startAt ? now() - startAt : 0); 
+			};
+	};
+
+var x = new clsStopwatch();
+var $time;
+var clocktimer;
+
+function pad(num, size) {
+	var s = "0000" + num;
+	return s.substr(s.length - size);
+}
+
+function formatTime(time) {
+	var h = m = s = ms = 0;
+	var newTime = '';
+
+	h = Math.floor( time / (60 * 60 * 1000) );
+	time = time % (60 * 60 * 1000);
+	m = Math.floor( time / (60 * 1000) );
+	time = time % (60 * 1000);
+	s = Math.floor( time / 1000 );
+	ms = time % 1000;
+
+	newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2) + ':' + pad(ms, 3);
+	return newTime;
+}
+
+function show() {
+	$time = document.getElementById('time');
+	update();
+}
+
+function update() {
+	$time.innerHTML = formatTime(x.time());
+}
+
+function start() {
+	clocktimer = setInterval("update()", 1);
+	x.start();
+}
+
+function stop() {
+	x.stop();
+	clearInterval(clocktimer);
+}
+
+function reset() {
+	stop();
+	x.reset();
+	update();
+}
+
+function createLobby() {
+	window.prompt("sometext","defaultText");
+	showpopup();
+	socket.emit('createLobby');
+}
+
+var placeD = document.getElementById("place");
+function endGame(num){
+	stop();
+	placeD.innerHTML="Place: ";
+	var buttony = document.getElementById("button");
+	buttony.disabled=true;
+	
+	buttony.style.display = "none";
+
+	codeInput.disabled=true;
+	con.style.display = "none";
+
+
+	if (num==1){
+		placeD.innerHTML="1st! You are the fastest of them all <img src='./images/prize.jpg'>";
+	} else if (num==2){
+		placeD.innerHTML="2nd! You are pretty good";
+	} else if (num==3){
+		placeD.innerHTML="3rd! You are pretty okay";
+	} else if (num==4){
+		placeD.innerHTML="4th. not bad";
+	} else {
+		placeD.innerHTML=num+". you need more practice";
+	}
+}
+
+
+</script>
+</body>
+</html>

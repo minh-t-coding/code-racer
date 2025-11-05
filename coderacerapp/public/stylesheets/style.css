@@ -1,0 +1,265 @@
+body {
+    font-family: Telegrama;
+    font-weight: normal;
+    font-style: normal;
+    color: #ffffff;
+    background-color: #000000;
+    height: 1000px;
+}
+iframe {
+    padding: 0px;
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0px;
+}
+div.code {
+    display: inline-block;
+}
+div.codeh {
+    display: inline-block;
+}
+div.place {
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+}
+
+div.usernameDiv {
+    font-size: 20px;
+    float: right;
+}
+
+div.lobby {
+    line-height: 1.6;
+    margin: 10px;
+    float: left;
+    padding: 10px;
+    width: 400px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    border-color: #ffffff;
+}
+
+@font-face {
+    font-family: "Telegrama";
+    src: url("./fonts/telegrama_render.otf");
+}
+
+@font-face {
+    font-family: "Monaco";
+    src: url("./fonts/Monaco.ttf");
+}
+img.button {
+    margin: 15px;
+    float: left;
+}
+
+img.button:hover {
+    opacity: 0.5;
+}
+img.button:active {
+    opacity: 0.3;
+    transform: translateY(2px);
+}
+
+div.banner {
+    background: url(../images/banner.png);
+    margin: 0px;
+
+    width: 100%;
+    height: 80px;
+}
+div.problem {
+    line-height: 1.6;
+    margin: 10px;
+    float: left;
+    padding: 10px;
+    width: 400px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    border-color: #ffffff;
+}
+div.console {
+    line-height: 1.6;
+    margin: 10px;
+    float: left;
+    padding: 10px;
+    width: 400px;
+    height: 100px;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    border-color: #ffffff;
+}
+
+div.col {
+    float: left;
+    width: 700px;
+}
+
+p.codeText {
+    display: inline-block;
+    font-family: Monaco;
+    margin: 0px;
+    padding: 0px;
+}
+h1.header {
+    padding: 12px;
+}
+
+img.icon {
+    margin-left: 20px;
+    height: 60px;
+    width: 94px;
+    float: left;
+}
+
+div.watch {
+    margin: 10px;
+    padding: 10px;
+    border-style: solid;
+    float: left;
+    width: 618px;
+    border-width: 5px;
+    border-color: #ffffff;
+    border-radius: 20px;
+}
+
+textarea.codeInput {
+    border-width: 5px;
+    margin: 10px;
+    float: left;
+    font-family: Monaco;
+    font-weight: normal;
+    font-style: normal;
+
+    background: url(http://i.imgur.com/2cOaJ.png);
+    background-attachment: local;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    padding-left: 35px;
+    padding-top: 10px;
+    border-color: #ccc;
+    border-radius: 20px;
+    width: 600px;
+    height: 400px;
+    resize: none;
+}
+#display_popup {
+    font-size: 20px;
+    cursor: pointer;
+}
+#popup_box {
+    visibility: hidden;
+    display: none;
+    width: 30%;
+    background-color: #bdbdbd;
+    position: fixed;
+    left: 35%;
+    top: 30%;
+    border-radius: 10px;
+    border: 2px solid grey;
+    box-shadow: 0px 0px 10px 0px grey;
+    font-family: helvetica;
+}
+#popup_box #cancel_button {
+    float: right;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: 5px;
+    background-color: grey;
+    border: none;
+    color: white;
+    padding: 5px;
+    border-radius: 1000px;
+    width: 25px;
+    border: 1px solid #424242;
+    box-shadow: 0px 0px 10px 0px grey;
+    cursor: pointer;
+}
+#popup_box #info_text {
+    padding: 10px;
+    clear: both;
+    background-color: white;
+    color: #6e6e6e;
+}
+#popup_box #close_button {
+    margin: 0px;
+    padding: 0px;
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    background-color: grey;
+    color: white;
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+    font-family: Telegrama;
+    background-color: #000000;
+    color: white;
+    margin: 18px;
+    border: solid, 1px #ffffff;
+    cursor: pointer;
+    opacity: 0.8;
+    float: right;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+
+    border: 3px solid #f1f1f1;
+}
+
+/* Add styles to the form container */
+.form-container {
+    margin: 13px;
+    float: right;
+    width: 200px;
+}
+
+/* Full-width input fields */
+.form-container input[type="text"],
+.form-container input[type="password"] {
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+    background-color: #000000;
+    color: white;
+    font-family: Telegrama;
+    border: solid, 1px;
+    cursor: pointer;
+
+    opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+    background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover {
+    opacity: 1;
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+        <title>Code Racer</title>
+    </head>
+    <body>
+        Place:
+        <div id="place"></div>
+
+        <script>
+            // Wait 5 seconds, then log and update content
+            setTimeout(() => {
+                console.log("Hello from Code Racer!");
+                document.getElementById("place").textContent =
+                    "Finished after 5 seconds!";
+            }, 5000);
+        </script>
+    </body>
+</html>

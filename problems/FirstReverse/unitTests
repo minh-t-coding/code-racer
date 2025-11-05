@@ -1,0 +1,10 @@
+[
+	{
+		"input": ["coderbyte"],
+		"output": "etybredoc"
+	},
+	{
+		"input": ["I Love Code"],
+		"output": "edoC evoL I"
+	}
+]

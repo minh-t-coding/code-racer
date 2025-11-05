@@ -1,0 +1,4 @@
+function SimpleAdding(num) { 
+	// code goes here 
+	return num;  
+}

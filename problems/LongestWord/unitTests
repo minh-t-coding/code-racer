@@ -1,0 +1,10 @@
+[
+	{
+		"input": ["fun&!! time"],
+		"output": "time"
+	},
+	{
+		"input": ["I love dogs"],
+		"output": "love"
+	}
+]

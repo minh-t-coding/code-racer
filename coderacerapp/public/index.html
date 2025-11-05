@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+        <script
+            src="javascripts/lobbies.js"
+            type="text/javascript"
+            defer
+        ></script>
+        <title>Code Racer</title>
+
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+
+    <body onload="">
+        <img class="icon" src="./images/icon.png" />
+        <h1 class="header">
+            Code Racer
+            <div class="usernameDiv">
+                Username:
+                <div id="username">Guest</div>
+            </div>
+        </h1>
+
+        <div class="banner">
+            <img
+                class="button"
+                id="buttonCreate"
+                src="./images/buttonCreateLobby.png"
+                onclick="pageChange('lobbyCreate.html');
+	createLobby();"
+            />
+            <img
+                class="button"
+                id="buttonJoin"
+                src="./images/buttonMel.png"
+                onclick="pageChange('lobbyJoin.html');joinLobby();"
+            />
+            <button class="open-button" onclick="openForm()" id="uButton">
+                Select Username
+            </button>
+            <div class="form-popup" id="myForm">
+                <div class="form-container">
+                    <input
+                        type="text"
+                        placeholder="Choose Username"
+                        name="email"
+                        id="uInput"
+                        required
+                    />
+                    <button onclick="login()" class="btn">Select</button>
+                </div>
+            </div>
+        </div>
+
+        <iframe
+            style="visibility: hidden"
+            scrolling="no"
+            onload="this.style.visibility = 'visible';"
+            frameborder="0"
+            src="home.html"
+            name="iframe_a"
+            id="iframe"
+        ></iframe>
+
+        <script>
+            var uDisplay = document.getElementById("username");
+            var uInput = document.getElementById("uInput");
+            var uButton = document.getElementById("uButton");
+            var frame = document.getElementById("iframe");
+
+            function pageChange(pageName) {
+                frame.src = pageName;
+            }
+
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
+            }
+
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
+
+            function login() {
+                closeForm();
+                uButton.disabled = true;
+                uButton.style.display = "none";
+                uDisplay.innerHTML = uInput.value;
+            }
+            var flag = 0;
+            function updateLobby(people) {
+                var lobbyStr = "";
+                if (flag) {
+                    var lobbyDisplay =
+                        frame.contentWindow.document.getElementById("lobby");
+                    var but =
+                        frame.contentWindow.document.getElementById("button");
+                    if (
+                        frame.src !=
+                        "http://ec2-3-17-139-35.us-east-2.compute.amazonaws.com:3000/lobbyJoin.html"
+                    ) {
+                        console.log("broke");
+
+                        but.onclick = startGame;
+                    }
+
+                    for (var person of people) {
+                        for (var key in person) {
+                            lobbyStr += "<div>" + person[key] + "</div>";
+                        }
+                    }
+                    lobbyDisplay.innerHTML = lobbyStr;
+                } else {
+                    frame.onload = function () {
+                        var lobbyDisplay =
+                            frame.contentWindow.document.getElementById(
+                                "lobby"
+                            );
+                        var but =
+                            frame.contentWindow.document.getElementById(
+                                "button"
+                            );
+                        if (
+                            frame.src !=
+                            "http://ec2-3-17-139-35.us-east-2.compute.amazonaws.com:3000/lobbyJoin.html"
+                        ) {
+                            console.log("broke");
+                            but.onclick = startGame;
+                        }
+
+                        for (var person of people) {
+                            for (var key in person) {
+                                lobbyStr += "<div>" + person[key] + "</div>";
+                            }
+                        }
+                        lobbyDisplay.innerHTML = lobbyStr;
+                        flag = 1;
+                    };
+                }
+            }
+
+            function initGame(data) {
+                pageChange("game.html");
+                frame.onload = function () {
+                    var but =
+                        frame.contentWindow.document.getElementById("button");
+                    var prob =
+                        frame.contentWindow.document.getElementById("prob");
+                    var tests =
+                        frame.contentWindow.document.getElementById("tests");
+                    var cod =
+                        frame.contentWindow.document.getElementById(
+                            "codeInput"
+                        );
+                    var probName =
+                        frame.contentWindow.document.getElementById("probName");
+                    tests.innerHTML = "";
+
+                    for (var ob of data.unitTests) {
+                        tests.innerHTML += "Input: " + ob.input + "<br>";
+                        tests.innerHTML += "Output: " + ob.output + "<br><br>";
+                    }
+
+                    probName.innerHTML = data.problemName;
+
+                    but.onclick = sendCode;
+
+                    prob.innerHTML = data.problem;
+                    frame.contentWindow.start();
+                    cod.value = data.header;
+                };
+            }
+
+            function checkPlace(data) {
+                if (data.hasWon == true) {
+                    frame.contentWindow.document.getElementById(
+                        "console"
+                    ).innerHTML =
+                        "Testcases passed: " +
+                        data.numPassed +
+                        " / " +
+                        data.numTotal;
+                    frame.contentWindow.endGame(data.placement);
+                } else {
+                    frame.contentWindow.document.getElementById(
+                        "console"
+                    ).innerHTML =
+                        "Testcases passed: " +
+                        data.numPassed +
+                        " / " +
+                        data.numTotal;
+                }
+            }
+        </script>
+    </body>
+</html>

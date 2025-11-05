@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+        <title>Code Racer</title>
+    </head>
+    <body>
+        <h3>Make lobby</h3>
+
+        Code:
+        <div type="text" class="code" id="code"></div>
+
+        <!-- The button used to copy the text -->
+        <button onclick="copyCode()">c</button>
+
+        <h2>Players</h2>
+        <div class="lobby" id="lobby"></div>
+        <img class="button" id="button" src="./images/buttonStartGame.png" />
+        <script>
+            function copyCode() {
+                /* Get the text field */
+                var codeDiv = document.getElementById("code");
+
+                /* Select the text field */
+                const el = document.createElement("textarea");
+                el.value = codeDiv.innerHTML;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand("copy");
+                document.body.removeChild(el);
+            }
+
+            function pageChange(pageName) {
+                location.href = pageName;
+            }
+        </script>
+    </body>
+</html>
