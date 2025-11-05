@@ -1,7 +1,7 @@
 # CodeRacer
 type racer, but with code!
 
-![Code Racer Screenshot](code-racer-screenshot.png)
+![Code Racer Screenshot](code-racer-screenshot.PNG)
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/) v14+  
